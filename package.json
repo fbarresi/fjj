@@ -1,7 +1,7 @@
 {
-  "name": "npm-module-boilerplate",
+  "name": "fjj",
   "version": "1.0.0",
-  "description": "Boilerplate for npm modules with ES6 features and syntax",
+  "description": "CLI Filebased Job Journal",
   "main": "./lib/index.js",
   "scripts": {
     "clean": "rimraf lib",
@@ -21,21 +21,20 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/flexdinesh/npm-module-boilerplate.git"
+    "url": "git+https://github.com/fbarresi/fjj.git"
   },
   "keywords": [
-    "boilerplate",
-    "npm",
-    "module",
-    "node",
-    "javascript"
+    "productivity",
+    "job",
+    "journal",
+    "filebased"
   ],
-  "author": "Dinesh Pandiyan <flexdinesh@gmail.com>",
+  "author": "Federico Barresi <fede.barresi@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/flexdinesh/npm-module-boilerplate/issues"
+    "url": "https://github.com/fbarresi/fjj/issues"
   },
-  "homepage": "https://github.com/flexdinesh/npm-module-boilerplate#readme",
+  "homepage": "https://github.com/fbarresi/fjj#readme",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.1",
