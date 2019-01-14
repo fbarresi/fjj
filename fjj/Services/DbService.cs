@@ -1,13 +1,30 @@
-
+using System;
 using System.IO;
+using System.Linq;
+using System.Reflection;
+using fjj.Interfaces;
+using LiteDB;
 
-public class DbService 
+namespace fjj.Services
 {
-  
-    private string GetSaveLocation()
+	public class DbService : IDbService, IDisposable
+	{
+		private readonly LiteEngine db;
+
+		public DbService()
 		{
-			var location = System.Reflection.Assembly.GetExecutingAssembly().Location;
+			db = new LiteEngine(Path.Combine(GetSaveLocation(), Constants.Constants.DbFilename));
+		}
+
+		public void Dispose()
+		{
+			db.Dispose();
+		}
+
+		private string GetSaveLocation()
+		{
+			var location = Assembly.GetExecutingAssembly().Location;
 			return Path.GetDirectoryName(location);
 		}
-  
+	}
 }
