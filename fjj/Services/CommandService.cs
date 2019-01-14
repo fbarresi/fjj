@@ -6,7 +6,7 @@ using McMaster.Extensions.CommandLineUtils;
 namespace fjj.Services
 {
 	[Command(Name = "fjj", Description = "A simple file based job journal"),
-	 Subcommand(typeof(StartCommand))]
+	 Subcommand(typeof(StartCommand), typeof(StopCommand))]
 	[VersionOptionFromMember("--version", MemberName = nameof(GetVersion))]
 	public class CommandService
 	{
