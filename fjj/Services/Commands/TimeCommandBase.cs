@@ -11,10 +11,10 @@ namespace fjj.Services.Commands
 	{
 		private readonly EntryType entryType;
 
-		[Option(ShortName = "-")]
+		[Option(ShortName = "m")]
 		public int Minus { get; }
 
-		[Option(ShortName = "+")]
+		[Option(ShortName = "p")]
 		public int Plus { get; }
 
 
