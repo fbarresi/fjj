@@ -20,7 +20,7 @@ namespace fjj.Services
 
 			return 1;
 		}
-		private static string GetVersion()
+		public static string GetVersion()
 			=> typeof(CommandService).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
 	}
 }
