@@ -26,7 +26,7 @@ namespace fjj.Services
 
 		private string GetSaveLocation()
 		{
-			var location = Assembly.GetExecutingAssembly().Location;
+			var location = Assembly.GetEntryAssembly().Location;
 			return Path.GetDirectoryName(location);
 		}
 
