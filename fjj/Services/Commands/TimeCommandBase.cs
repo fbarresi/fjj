@@ -9,7 +9,7 @@ namespace fjj.Services.Commands
 {
 	public class TimeCommandBase : CommandBase
 	{
-		private readonly EntryType entryType;
+		protected readonly EntryType EntryType;
 
 		[Option(ShortName = "m")]
 		public int Minus { get; }
@@ -20,18 +20,18 @@ namespace fjj.Services.Commands
 
 		public TimeCommandBase(IDbService dbService, EntryType entryType) : base(dbService)
 		{
-			this.entryType = entryType;
+			this.EntryType = entryType;
 		}
 
 		protected virtual JournalEntry CreateEntry()
 		{
-			return new JournalEntry(){Time = DateTime.Now, EntryType = entryType};
+			return new JournalEntry(){Time = DateTime.Now, EntryType = EntryType};
 		}
 
 		protected virtual void LogReply(JournalEntry journalEntry, IConsole console)
 		{
 			console.ForegroundColor = ConsoleColor.DarkGreen;
-			console.WriteLine($"{entryType} - {journalEntry.Time:dd.MM.yyyy} {journalEntry.Time:t}");
+			console.WriteLine($"{EntryType} - {journalEntry.Time:dd.MM.yyyy} {journalEntry.Time:t}");
 		}
 
 		protected virtual void OnExecute(CommandLineApplication app, IConsole console)
