@@ -26,8 +26,7 @@ namespace fjj.Services
 
 		private string GetSaveLocation()
 		{
-			var location = Assembly.GetEntryAssembly().Location;
-			return Path.GetDirectoryName(location);
+			return AppDomain.CurrentDomain.BaseDirectory;
 		}
 
 		public void Add(JournalEntry entry)

@@ -14,7 +14,7 @@ namespace fjj.Services.Commands
 		[Option(ShortName = "m")]
 		public int Minus { get; }
 
-		[Option(ShortName = "p")]
+		[Option(ShortName = "+")]
 		public int Plus { get; }
 
 
