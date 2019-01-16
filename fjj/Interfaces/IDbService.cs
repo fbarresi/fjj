@@ -8,7 +8,7 @@ namespace fjj.Interfaces
 {
 	public interface IDbService
 	{
-		void Add(JournalEntry entry);
 		IEnumerable<JournalEntry> Filter(Expression<Func<JournalEntry, bool>> predicate);
+		void TryAdd(JournalEntry entry);
 	}
 }

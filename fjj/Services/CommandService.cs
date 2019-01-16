@@ -7,6 +7,7 @@ namespace fjj.Services
 {
 	[Command(Name = "fjj", Description = "A simple file based job journal"),
 	 Subcommand(typeof(StartCommand), typeof(StopCommand), typeof(ProjectCommand), typeof(ActivityCommand))]
+	[VersionOptionFromMember("--version", MemberName = nameof(GetVersion))]
 	public class CommandService
 	{
 		private int OnExecute(CommandLineApplication app, IConsole console)
@@ -14,10 +15,11 @@ namespace fjj.Services
 			app.ShowHelp();
 
 			console.WriteLine();
-			console.ForegroundColor = ConsoleColor.Red;
-			console.WriteLine("You must specify a subcommand.");
+			console.WriteLine("You have to specify a subcommand.");
 
 			return 1;
 		}
+		public static string GetVersion()
+			=> typeof(CommandService).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
 	}
 }

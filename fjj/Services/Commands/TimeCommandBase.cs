@@ -34,6 +34,12 @@ namespace fjj.Services.Commands
 			console.WriteLine($"{EntryType} - {journalEntry.Time:dd.MM.yyyy} {journalEntry.Time:t}");
 		}
 
+		protected virtual void LogError(Exception error, IConsole console)
+		{
+			console.ForegroundColor = ConsoleColor.DarkRed;
+			console.WriteLine($"Unable to add entry - {error.Message}");
+		}
+
 		protected virtual void OnExecute(CommandLineApplication app, IConsole console)
 		{
 			var journalEntry = CreateEntry();
@@ -41,9 +47,16 @@ namespace fjj.Services.Commands
 			journalEntry.Time += TimeSpan.FromMinutes(Plus);
 			journalEntry.Time -= TimeSpan.FromMinutes(Minus);
 
-			DBService.Add(journalEntry);
+			try
+			{
+				DBService.TryAdd(journalEntry);
 
-			LogReply(journalEntry, console);
+				LogReply(journalEntry, console);
+			}
+			catch (Exception e)
+			{
+				LogError(e, console);
+			}
 		}
 	}
 }

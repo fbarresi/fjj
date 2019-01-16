@@ -7,26 +7,28 @@ using McMaster.Extensions.CommandLineUtils;
 
 namespace fjj.Services.Commands
 {
+	[Command(Name = "project", Description = "set current project")]
 	public class ProjectCommand : TimeCommandBase
 	{
 		public ProjectCommand(IDbService dbService) : base(dbService, EntryType.Project)
 		{
 		}
 
-		[Option(ShortName = "p", LongName = "project")]
+		[Argument(0, Description = "your actual project")]
 		public string Project { get; set; }
+		[Argument(1, Description = "your actual activity")]
+		public string Activity { get; set; }
 
 
 		protected override JournalEntry CreateEntry()
 		{
-			if (Project.Contains("-"))
-			{
-				var tiles = Project.Split("-", StringSplitOptions.RemoveEmptyEntries);
-				return new JournalEntry(){Time = DateTime.Now, EntryType = this.EntryType, Project = tiles.FirstOrDefault().Trim(), Activity = tiles.LastOrDefault().Trim()};
+			return new JournalEntry(){Time = DateTime.Now, EntryType = this.EntryType, Project = Project, Activity = Activity};
+		}
 
-			}
-			else
-				return new JournalEntry(){Time = DateTime.Now, EntryType = this.EntryType, Project = Project};
+		protected override void LogReply(JournalEntry journalEntry, IConsole console)
+		{
+			console.ForegroundColor = ConsoleColor.DarkGreen;
+			console.WriteLine($"{EntryType} - {Project} - {Activity} - {journalEntry.Time:dd.MM.yyyy} {journalEntry.Time:t}");
 		}
 	}
 }
