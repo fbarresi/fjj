@@ -12,7 +12,7 @@
     <PackageProjectUrl>https://github.com/fbarresi/fjj</PackageProjectUrl>
     <PackageLicenseUrl>https://raw.githubusercontent.com/fbarresi/fjj/master/LICENSE</PackageLicenseUrl>
     <PackageTags>file job journal</PackageTags>
-    <PackageIconUrl>https://raw.githubusercontent.com/fbarresi/fjj/master/images/icon.png</PackageIconUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/fbarresi/fjj/master/fjj/images/icon.png</PackageIconUrl>
     <Company />
   </PropertyGroup>
 
