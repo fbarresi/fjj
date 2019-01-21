@@ -10,5 +10,6 @@ namespace fjj.Interfaces
 	{
 		IEnumerable<JournalEntry> Filter(Expression<Func<JournalEntry, bool>> predicate);
 		void TryAdd(JournalEntry entry);
+		string DbFile { get; }
 	}
 }

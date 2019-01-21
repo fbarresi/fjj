@@ -17,7 +17,8 @@ namespace fjj.Services
 
 		public DbService()
 		{
-			db = new LiteDatabase(Path.Combine(GetSaveLocation(), Constants.Constants.DbFilename));
+			DbFile = Path.Combine(GetSaveLocation(), Constants.Constants.DbFilename);
+			db = new LiteDatabase(DbFile);
 		}
 
 		public void Dispose()
@@ -27,7 +28,11 @@ namespace fjj.Services
 
 		private string GetSaveLocation()
 		{
-			return AppDomain.CurrentDomain.BaseDirectory;
+			var applicationData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+			var dataLocation = Path.Combine(applicationData, Constants.Constants.DataFolderName);
+			if(!Directory.Exists(dataLocation))
+				Directory.CreateDirectory(dataLocation);
+			return dataLocation;
 		}
 
 
@@ -48,6 +53,8 @@ namespace fjj.Services
 			CanInsert(entry);
 			Add(entry);
 		}
+
+		public string DbFile { get; private set; }
 
 		private void CanInsert(JournalEntry entry)
 		{
@@ -72,7 +79,7 @@ namespace fjj.Services
 
 		private void JournalWasStarted(JournalEntry entry)
 		{
-			if(CountStartAndStopForADay(entry) % 2 == 1)
+			if(CountStartAndStopForADay(entry) % 2 != 1)
 				throw new Exception("Journal was not started yet");
 		}
 
@@ -83,7 +90,7 @@ namespace fjj.Services
 
 		private void JournalWasStopped(JournalEntry entry)
 		{
-			if(CountStartAndStopForADay(entry) % 2 == 0)
+			if(CountStartAndStopForADay(entry) % 2 != 0)
 				throw new Exception("Journal was not stopped yet");
 		}
 
