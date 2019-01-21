@@ -84,9 +84,8 @@ namespace fjj.Services
 		}
 
 		private int CountStartAndStopForADay(JournalEntry entry) => GetCollection()
-			.Count(journalEntry => journalEntry.Time.Date == entry.Time.Date &&
-				       (journalEntry.EntryType == EntryType.Stop ||
-					       journalEntry.EntryType == EntryType.Start));
+			.Find(Query.Between(nameof(JournalEntry.Time), entry.Time.Date, entry.Time+TimeSpan.FromDays(1)))
+			.Count(journalEntry => journalEntry.EntryType == EntryType.Stop || journalEntry.EntryType == EntryType.Start);
 
 		private void JournalWasStopped(JournalEntry entry)
 		{
